@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #d32f2f 0%, #b71c1c 100%);
+  padding: 15px 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+  margin-right: 12px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.logo span {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
+
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items:center;
+  gap:20px;
+ 
+}
+
+.nav-links li {
+  margin: 0 15px;
+  
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #ffebee;
+  color: #d32f2f;
+  transform: translateY(-2px);
+  display: inline-block;
+}
+
+.login-btn a {
+  background-color: #fff;
+  color: #d32f2f;
+  padding: 10px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn a:hover {
+  background-color: #ffccbc;
+  transform: translateY(-2px);
+}
+
+.sub-nav {
+  background-color: #fff;
+  padding: 12px 25px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sub-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.sub-nav a:hover {
+  background-color: #d32f2f;
+  color: #fff;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
+
+  .search-bar {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .login-btn {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-btn a {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .sub-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sub-nav a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo span {
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .search-bar input {
+    font-size: 14px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+}
