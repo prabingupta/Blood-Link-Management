@@ -25,3 +25,4 @@ public class DbConfig {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 }
+

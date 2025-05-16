@@ -12,6 +12,7 @@
       <li><a href="<%= request.getContextPath() %>/contact" class="active">Contact Us</a></li>
       <li><a href="<%= request.getContextPath() %>/services" class="active">Our Services</a></li>
       <li><a href="<%= request.getContextPath() %>/portfolio" class="active">Portfolio</a></li>
+      <li><a href="<%= request.getContextPath() %>/myprofile" class="active">MyProfile</a></li>
     </ul>
     <div class="login-btn">
       <a href="<%= request.getContextPath() %>/logout">Logout</a>

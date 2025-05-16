@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.content {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bloodbank-section {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #d32f2f;
+}
+
+.bloodbank-section h2 {
+    font-size: 24px;
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.bank-details {
+    margin-bottom: 30px;
+}
+
+.bank-card {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.bank-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.bank-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.stock-section {
+    margin-top: 20px;
+}
+
+.stock-section h3 {
+    font-size: 18px;
+    color: #d32f2f;
+    margin-bottom: 15px;
+}
+
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.stock-table th,
+.stock-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.stock-table th {
+    background: #f9e6e6;
+    color: #333;
+    font-weight: 600;
+}
+
+.stock-table tr:hover {
+    background: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 20px;
+    }
+
+    .bloodbank-section {
+        padding: 20px;
+    }
+
+    .bloodbank-section h2 {
+        font-size: 20px;
+    }
+
+    .bank-card h3 {
+        font-size: 16px;
+    }
+
+    .bank-card p {
+        font-size: 13px;
+    }
+
+    .stock-section h3 {
+        font-size: 16px;
+    }
+
+    .stock-table {
+        font-size: 13px;
+    }
+
+    .stock-table th,
+    .stock-table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 15px;
+    }
+
+    .bloodbank-section {
+        padding: 15px;
+    }
+
+    .bloodbank-section h2 {
+        font-size: 18px;
+    }
+
+    .bank-card h3 {
+        font-size: 14px;
+    }
+
+    .bank-card p {
+        font-size: 12px;
+    }
+
+    .stock-section h3 {
+        font-size: 14px;
+    }
+
+    .stock-table {
+        font-size: 12px;
+    }
+
+    .stock-table th,
+    .stock-table td {
+        padding: 6px;
+    }
+}

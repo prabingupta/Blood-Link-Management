@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -11,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink Nepal - Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/css/admindashboard.css" />
 </head>
 <body>
     <!-- Admin Heading Bar -->
@@ -34,74 +33,126 @@
                 <li><a href="${contextPath}/patients"><span class="icon">🩺</span> Patient</a></li>
                 <li><a href="${contextPath}/donations"><span class="icon">💉</span> Donations</a></li>
                 <li><a href="${contextPath}/bloodRequests"><span class="icon">📋</span> Blood Requests</a></li>
-                <li><a href="${contextPath}/requestHistory"><span class="icon">📜</span> Request History</a></li>
-                <li><a href="${contextPath}/bloodStock"><span class="icon">🩺</span> Blood Stock</a></li>
-                <li><a href="${contextPath}/bloodStock"><span class="icon">👤</span> My Profile</a></li>
+                <li><a href="${contextPath}/bloodBanks"><span class="icon">🏢</span> Blood Bank</a></li>
             </ul>
         </div>
 
         <div class="content">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                <h2>Welcome to Admin Dashboard</h2>
-                <p>Hello, Admin! You are at the heart of BloodLink Nepal, a platform dedicated to saving lives by connecting blood donors with those in need. As an admin, you have the critical responsibility of managing the entire blood donation ecosystem, ensuring that blood is available for emergencies and planned medical procedures.</p>
-                <p>Your role includes overseeing donor and patient registrations, approving blood donation requests, monitoring blood stock levels, and maintaining accurate records of all transactions. Use this dashboard to track key metrics, manage requests efficiently, and ensure that BloodLink Nepal continues to serve as a lifeline for the community. Your efforts make a real difference in saving lives!</p>
-            </div>
-
-            <div class="header">
-                <div class="info-box">
-                    <h3>A+</h3>
-                    <p>10</p>
+            <!-- Dashboard Overview Section -->
+            <div class="dashboard-section">
+                <h2>Admin Dashboard</h2>
+                <div class="overview">
+                    <div class="card">
+                        <h3>Total Donors</h3>
+                        <p class="count">${totalDonors != null ? totalDonors : 150}</p>
+                        <a href="${contextPath}/donors" class="view-link">View Donors</a>
+                    </div>
+                    <div class="card">
+                        <h3>Total Patients</h3>
+                        <p class="count">${totalPatients != null ? totalPatients : 80}</p>
+                        <a href="${contextPath}/patients" class="view-link">View Patients</a>
+                    </div>
+                    <div class="card">
+                        <h3>Total Donations</h3>
+                        <p class="count">${totalDonations != null ? totalDonations : 200}</p>
+                        <a href="${contextPath}/donations" class="view-link">View Donations</a>
+                    </div>
+                    <div class="card">
+                        <h3>Pending Blood Requests</h3>
+                        <p class="count">${pendingRequests != null ? pendingRequests : 10}</p>
+                        <a href="${contextPath}/bloodRequests" class="view-link">View Requests</a>
+                    </div>
                 </div>
-                <div class="info-box">
-                    <h3>B+</h3>
-                    <p>15</p>
+                <!-- Blood Stock Overview -->
+                <div class="stock-overview">
+                    <h3>Blood Stock Status</h3>
+                    <table class="stock-table">
+                        <thead>
+                            <tr>
+                                <th>Blood Group</th>
+                                <th>Units Available</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic data using JSTL -->
+                            <c:forEach var="stock" items="${bloodStockList}">
+                                <tr>
+                                    <td>${stock.bloodGroup}</td>
+                                    <td>${stock.unitsAvailable}</td>
+                                    <td>${stock.lastUpdated}</td>
+                                </tr>
+                            </c:forEach>
+                            <!-- Fallback sample data if bloodStockList is empty -->
+                            <c:if test="${empty bloodStockList}">
+                                <tr>
+                                    <td>A+</td>
+                                    <td>10</td>
+                                    <td>2025-05-02</td>
+                                </tr>
+                                <tr>
+                                    <td>B+</td>
+                                    <td>15</td>
+                                    <td>2025-05-02</td>
+                                </tr>
+                                <tr>
+                                    <td>O+</td>
+                                    <td>8</td>
+                                    <td>2025-05-02</td>
+                                </tr>
+                            </c:if>
+                        </tbody>
+                    </table>
+                    <a href="${contextPath}/bloodBanks" class="view-link">Manage Blood Stock</a>
                 </div>
-                <div class="info-box">
-                    <h3>O+</h3>
-                    <p>12</p>
-                </div>
-                <div class="info-box">
-                    <h3>AB+</h3>
-                    <p>9</p>
-                </div>
-            </div>
-
-            <div class="header">
-                <div class="info-box">
-                    <h3>A-</h3>
-                    <p>8</p>
-                </div>
-                <div class="info-box">
-                    <h3>B-</h3>
-                    <p>10</p>
-                </div>
-                <div class="info-box">
-                    <h3>O-</h3>
-                    <p>6</p>
-                </div>
-                <div class="info-box">
-                    <h3>AB-</h3>
-                    <p>14</p>
-                </div>
-            </div>
-
-            <div class="header">
-                <div class="info-box">
-                    <h3>Total Donors</h3>
-                    <p>109</p>
-                </div>
-                <div class="info-box">
-                    <h3>Total Requests</h3>
-                    <p>20</p>
-                </div>
-                <div class="info-box">
-                    <h3>Approved Requests</h3>
-                    <p>8</p>
-                </div>
-                <div class="info-box">
-                    <h3>Total Blood Unit in ml</h3>
-                    <p>25 units</p>
+                <!-- Recent Blood Requests -->
+                <div class="recent-requests">
+                    <h3>Recent Blood Requests</h3>
+                    <table class="request-table">
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Patient ID</th>
+                                <th>Blood Group</th>
+                                <th>Units Required</th>
+                                <th>Request Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic data using JSTL -->
+                            <c:forEach var="request" items="${recentRequests}">
+                                <tr>
+                                    <td>${request.requestId}</td>
+                                    <td>${request.patientId}</td>
+                                    <td>${request.bloodGroup}</td>
+                                    <td>${request.unitRequired}</td>
+                                    <td>${request.requestDate}</td>
+                                    <td>${request.status}</td>
+                                </tr>
+                            </c:forEach>
+                            <!-- Fallback sample data if recentRequests is empty -->
+                            <c:if test="${empty recentRequests}">
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>A+</td>
+                                    <td>2</td>
+                                    <td>2025-05-01</td>
+                                    <td>Pending</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>O+</td>
+                                    <td>1</td>
+                                    <td>2025-05-02</td>
+                                    <td>Pending</td>
+                                </tr>
+                            </c:if>
+                        </tbody>
+                    </table>
+                    <a href="${contextPath}/bloodRequests" class="view-link">View All Requests</a>
                 </div>
             </div>
         </div>

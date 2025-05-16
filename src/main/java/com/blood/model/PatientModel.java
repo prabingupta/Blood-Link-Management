@@ -4,142 +4,79 @@ import java.time.LocalDate;
 
 public class PatientModel {
 
-    private int id;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
-    private String gender;
-    private String bloodGroup;
-    private String email;
-    private String phoneNumber;
-    private String requestedBloodGroup;
-    private LocalDate requestDate;
+	 private int patientId;
+	    private String patientName;
+	    private String bloodGroup;
+	    private String gender;
+	    private LocalDate dateOfBirth;
+	    private String requestDate;
+	    private int unitRequired;
 
-    public PatientModel() {
-    }
+	    public PatientModel() {
+	    }
 
-    public PatientModel(int id, String firstName, String lastName, LocalDate dob, String gender, String bloodGroup,
-                        String email, String phoneNumber, String requestedBloodGroup, LocalDate requestDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
-        this.bloodGroup = bloodGroup;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.requestedBloodGroup = requestedBloodGroup;
-        this.requestDate = requestDate;
-    }
+	    public PatientModel(String patientName, String bloodGroup, String gender, LocalDate dateOfBirth, String requestDate, int unitRequired) {
+	        this.patientName = patientName;
+	        this.bloodGroup = bloodGroup;
+	        this.gender = gender;
+	        this.dateOfBirth = dateOfBirth;
+	        this.requestDate = requestDate;
+	        this.unitRequired = unitRequired;
+	    }
 
-    public PatientModel(String firstName, String lastName, LocalDate dob, String gender, String bloodGroup,
-                        String email, String phoneNumber, String requestedBloodGroup, LocalDate requestDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
-        this.bloodGroup = bloodGroup;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.requestedBloodGroup = requestedBloodGroup;
-        this.requestDate = requestDate;
-    }
+	    public int getPatientId() {
+	        return patientId;
+	    }
 
-    public PatientModel(int id, String firstName, String lastName, String bloodGroup, String requestedBloodGroup, String email, String phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.bloodGroup = bloodGroup;
-        this.requestedBloodGroup = requestedBloodGroup;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
+	    public void setPatientId(int patientId) {
+	        this.patientId = patientId;
+	    }
 
-    public PatientModel(int id, String firstName, String lastName, String email, String phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
+	    public String getPatientName() {
+	        return patientName;
+	    }
 
-    public int getId() {
-        return id;
-    }
+	    public void setPatientName(String patientName) {
+	        this.patientName = patientName;
+	    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	    public String getBloodGroup() {
+	        return bloodGroup;
+	    }
 
-    public String getFirstName() {
-        return firstName;
-    }
+	    public void setBloodGroup(String bloodGroup) {
+	        this.bloodGroup = bloodGroup;
+	    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	    public String getGender() {
+	        return gender;
+	    }
 
-    public String getLastName() {
-        return lastName;
-    }
+	    public void setGender(String gender) {
+	        this.gender = gender;
+	    }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	    public LocalDate getDateOfBirth() {
+	        return dateOfBirth;
+	    }
 
-    public LocalDate getDob() {
-        return dob;
-    }
+	    public void setDateOfBirth(LocalDate dateOfBirth) {
+	        this.dateOfBirth = dateOfBirth;
+	    }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+	    public String getRequestDate() {
+	        return requestDate;
+	    }
 
-    public String getGender() {
-        return gender;
-    }
+	    public void setRequestDate(String requestDate) {
+	        this.requestDate = requestDate;
+	    }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	    public int getUnitRequired() {
+	        return unitRequired;
+	    }
 
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRequestedBloodGroup() {
-        return requestedBloodGroup;
-    }
-
-    public void setRequestedBloodGroup(String requestedBloodGroup) {
-        this.requestedBloodGroup = requestedBloodGroup;
-    }
-
-    public LocalDate getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(LocalDate requestDate) {
-        this.requestDate = requestDate;
-    }
-}
+	    public void setUnitRequired(int unitRequired) {
+	        this.unitRequired = unitRequired;
+	    }
+	}

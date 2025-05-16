@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,8 +85,9 @@
       <h1 class="highlight-title">Be a Lifesaver Today!</h1>
       <p class="banner-desc">Join BloodLink Nepal to make a difference in Nepal’s healthcare system! Donate blood to save lives or request blood for those in urgent need, ensuring no patient goes without support during critical times.</p>
       <p>Up to 1000 lives saved monthly!</p>
-      <a href="#" class="btn-action">Donate Now</a>
-      <a href="#" class="btn-action">Request for Blood</a>
+      <a href="<%= request.getContextPath() %>/#" class="btn-action">Donate Now</a>
+      <a href="<%= request.getContextPath() %>/#" class="btn-action">Request for Blood</a>
+     
       
     </div>
     <div class="banner-side">

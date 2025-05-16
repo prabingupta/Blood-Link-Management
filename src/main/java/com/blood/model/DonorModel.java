@@ -1,102 +1,40 @@
 package com.blood.model;
 
-import java.time.LocalDate;
-
 public class DonorModel {
-
-    private int id;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
-    private String gender;
+    private int donorId;
+    private String donorName;
     private String bloodGroup;
+    private String phone;
     private String email;
-    private String phoneNumber;
-    private LocalDate lastDonationDate;
+    private String address;
+    private String gender;
 
     public DonorModel() {
     }
 
-    public DonorModel(int id, String firstName, String lastName, LocalDate dob, String gender, String bloodGroup,
-                      String email, String phoneNumber, LocalDate lastDonationDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
+    public DonorModel(String donorName, String bloodGroup, String phone, String email, String address, String gender) {
+        this.donorName = donorName;
         this.bloodGroup = bloodGroup;
+        this.phone = phone;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.lastDonationDate = lastDonationDate;
-    }
-
-    public DonorModel(String firstName, String lastName, LocalDate dob, String gender, String bloodGroup,
-                      String email, String phoneNumber, LocalDate lastDonationDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
+        this.address = address;
         this.gender = gender;
-        this.bloodGroup = bloodGroup;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.lastDonationDate = lastDonationDate;
     }
 
-    public DonorModel(int id, String firstName, String lastName, String bloodGroup, String email, String phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.bloodGroup = bloodGroup;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+    public int getDonorId() {
+        return donorId;
     }
 
-    public DonorModel(int id, String firstName, String lastName, String email, String phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+    public void setDonorId(int donorId) {
+        this.donorId = donorId;
     }
 
-    public int getId() {
-        return id;
+    public String getDonorName() {
+        return donorName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setDonorName(String donorName) {
+        this.donorName = donorName;
     }
 
     public String getBloodGroup() {
@@ -107,6 +45,14 @@ public class DonorModel {
         this.bloodGroup = bloodGroup;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -115,19 +61,19 @@ public class DonorModel {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public LocalDate getLastDonationDate() {
-        return lastDonationDate;
+    public String getGender() {
+        return gender;
     }
 
-    public void setLastDonationDate(LocalDate lastDonationDate) {
-        this.lastDonationDate = lastDonationDate;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
