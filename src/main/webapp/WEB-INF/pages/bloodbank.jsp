@@ -37,37 +37,6 @@
                     </div>
                 </c:if>
             </div>
-            <div class="stock-section">
-                <h3>Available Blood Stock</h3>
-                <table class="stock-table">
-                    <thead>
-                        <tr>
-                            <th>Blood Group</th>
-                            <th>Units Available</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="request" items="${bloodRequestList}">
-                            <c:if test="${request.status == 'Pending'}">
-                                <tr>
-                                    <td>${request.bloodGroup}</td>
-                                    <td>${request.unitRequired}</td>
-                                </tr>
-                            </c:if>
-                        </c:forEach>
-                        <c:if test="${empty bloodRequestList}">
-                            <tr>
-                                <td>A+</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>O+</td>
-                                <td>15</td>
-                            </tr>
-                        </c:if>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
     <%@ include file="footer.jsp" %>

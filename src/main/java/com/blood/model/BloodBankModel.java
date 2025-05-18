@@ -1,7 +1,7 @@
 package com.blood.model;
 
 public class BloodBankModel {
-	private int bloodBankId;
+    private int bloodBankId;
     private String bloodBankName;
     private String address;
     private String email;
@@ -57,6 +57,3 @@ public class BloodBankModel {
         this.phone = phone;
     }
 }
-	
-
-

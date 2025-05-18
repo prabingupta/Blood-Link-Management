@@ -32,7 +32,7 @@
             </div>
             <div class="form-section">
                 <h3>Register as a Donor</h3>
-                <form action="${contextPath}/registerDonor" method="post">
+                <form action="${pageContext.request.contextPath}/donorregister" method="post">
                     <div class="form-group">
                         <label for="donorName">Name:</label>
                         <input type="text" id="donorName" name="donorName" required placeholder="Enter your name">

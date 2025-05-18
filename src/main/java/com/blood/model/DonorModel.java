@@ -22,19 +22,19 @@ public class DonorModel {
     }
 
     public int getDonorId() {
-        return donorId;
+        return donorId; 
     }
 
     public void setDonorId(int donorId) {
-        this.donorId = donorId;
+        this.donorId = donorId; 
     }
 
     public String getDonorName() {
-        return donorName;
+        return donorName; 
     }
 
     public void setDonorName(String donorName) {
-        this.donorName = donorName;
+        this.donorName = donorName; 
     }
 
     public String getBloodGroup() {

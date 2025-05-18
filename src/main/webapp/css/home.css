@@ -246,7 +246,7 @@
   color: #d32f2f;
   font-weight: 700;
   position: relative;
-  display: block; /* Changed to block to ensure full centering */
+  display: block;
   z-index: 1;
 }
 
@@ -277,14 +277,14 @@
 
 .category-grid {
   display: flex;
-  flex-wrap: wrap; /* Changed from nowrap to wrap for better responsiveness */
-  justify-content: center; /* Center the items horizontally */
-  gap: 30px; /* Consistent spacing between items */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
   padding-bottom: 20px;
   position: relative;
   z-index: 1;
-  max-width: 1200px; /* Added max-width to keep the grid centered */
-  margin: 0 auto; /* Center the grid on the page */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .category-item {
@@ -294,8 +294,8 @@
   padding: 20px;
   text-align: center;
   min-width: 240px;
-  flex: 1 1 240px; /* Allow items to grow/shrink but maintain a base width */
-  max-width: 300px; /* Added max-width to prevent items from stretching too wide */
+  flex: 1 1 240px;
+  max-width: 300px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -312,8 +312,8 @@
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s ease;
-  display: block; /* Ensure the image is treated as a block element */
-  margin: 0 auto; /* Center the image horizontally */
+  display: block;
+  margin: 0 auto;
 }
 
 .category-item img:hover {
@@ -331,6 +331,92 @@
   color: #d32f2f;
   font-weight: 600;
   font-size: 16px;
+}
+
+/* Specific styling for Blood Bank section */
+.blood-bank-section {
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #fef0f0, #fff);
+  border-top: 2px solid #d32f2f;
+  border-bottom: 2px solid #d32f2f;
+  margin: 20px 0;
+}
+
+.blood-bank-section .category-grid {
+  justify-content: center;
+}
+
+.blood-bank-section .category-item {
+  min-width: 350px;
+  max-width: 500px;
+  padding: 20px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: none;
+}
+
+.blood-bank-section .category-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.blood-bank-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #d32f2f, #b71c1c);
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(211, 47, 47, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+  }
+}
+
+.blood-bank-btn::before {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5C12 3.12 10.88 2 9.5 2S7 3.12 7 4.5C7 5.88 8.12 7 9.5 7S12 5.88 12 4.5ZM12 4.5V11M12 11H9.5M12 11H14.5M12 11V14.5C12 15.88 10.88 17 9.5 17S7 15.88 7 14.5C7 13.12 8.12 12 9.5 12" /><path d="M12 11V20" /><circle cx="12" cy="20" r="2" /></svg>') no-repeat center center;
+  background-size: contain;
+  margin-right: 15px;
+}
+
+.blood-bank-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(211, 47, 47, 0.5);
+  background: linear-gradient(90deg, #b71c1c, #d32f2f);
+}
+
+.blood-bank-subtitle {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #d32f2f;
+  font-weight: 500;
+  text-align: center;
 }
 
 /* Media Queries for Responsiveness */
@@ -405,7 +491,32 @@
 
   .category-item {
     min-width: 220px;
-    max-width: 250px; /* Adjusted for smaller screens */
+    max-width: 250px;
+  }
+
+  .blood-bank-section {
+    padding: 40px 20px;
+  }
+
+  .blood-bank-section .category-item {
+    min-width: 300px;
+    max-width: 400px;
+  }
+
+  .blood-bank-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    max-width: 350px;
+  }
+
+  .blood-bank-btn::before {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+
+  .blood-bank-subtitle {
+    font-size: 14px;
   }
 }
 
@@ -468,7 +579,7 @@
 
   .category-item {
     min-width: 200px;
-    max-width: 220px; /* Adjusted for very small screens */
+    max-width: 220px;
   }
 
   .category-item img {
@@ -478,4 +589,29 @@
   .category-item p {
     font-size: 14px;
   }
-}}
+
+  .blood-bank-section {
+    padding: 30px 15px;
+  }
+
+  .blood-bank-section .category-item {
+    min-width: 250px;
+    max-width: 300px;
+  }
+
+  .blood-bank-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    max-width: 280px;
+  }
+
+  .blood-bank-btn::before {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .blood-bank-subtitle {
+    font-size: 13px;
+  }
+}

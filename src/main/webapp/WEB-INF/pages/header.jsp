@@ -6,17 +6,20 @@
       <span>BloodLink Nepal</span>
     </div>
     
+   
+
     <ul class="nav-links">
-      <li><a href="<%= request.getContextPath() %>/home" class="active">Home</a></li>
-      <li><a href="<%= request.getContextPath() %>/about" class="active">About Us</a></li>
-      <li><a href="<%= request.getContextPath() %>/contact" class="active">Contact Us</a></li>
-      <li><a href="<%= request.getContextPath() %>/services" class="active">Our Services</a></li>
-      <li><a href="<%= request.getContextPath() %>/portfolio" class="active">Portfolio</a></li>
-      <li><a href="<%= request.getContextPath() %>/myprofile" class="active">MyProfile</a></li>
+      <li><a href="${pageContext.request.contextPath}/home" class="active">Home</a></li>
+      <li><a href="${pageContext.request.contextPath}/about" class="active">About Us</a></li>
+      <li><a href="${pageContext.request.contextPath}/contact" class="active">Contact Us</a></li>
+      <li><a href="${pageContext.request.contextPath}/services" class="active">Our Services</a></li>
+      <li><a href="${pageContext.request.contextPath}/portfolio" class="active">Portfolio</a></li>
+      <li><a href="${pageContext.request.contextPath}/profile" class="active">MyProfile</a></li>
+      
+      
     </ul>
     <div class="login-btn">
-      <a href="<%= request.getContextPath() %>/logout">Logout</a>
+      <a href="${pageContext.request.contextPath}/logout">Logout</a>
     </div>
   </nav>
- 
 </header>

@@ -36,7 +36,7 @@ public class RegisterController extends HttpServlet {
         String username = request.getParameter("username").trim();
         String email = request.getParameter("email").trim();
         String phone = request.getParameter("phone").trim();
-        String gender = request.getParameter("gender").trim();
+        String gender = request.getParameter("gender").trim();    
         String dob = request.getParameter("dob").trim();
         String bloodGroup = request.getParameter("bloodGroup").trim();
         String userType = request.getParameter("userType").trim();

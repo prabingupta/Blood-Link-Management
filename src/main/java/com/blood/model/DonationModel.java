@@ -1,21 +1,22 @@
 package com.blood.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class DonationModel {
-	
-	private int donationId;
+    private int donationId;
     private int donorId;
-    private LocalDate donationDate;
+    private Date donationDate;
+    private int bloodBankId;
     private String bloodGroup;
     private int unitDonated;
 
     public DonationModel() {
     }
 
-    public DonationModel(int donorId, LocalDate donationDate, String bloodGroup, int unitDonated) {
+    public DonationModel(int donorId, Date donationDate, int bloodBankId, String bloodGroup, int unitDonated) {
         this.donorId = donorId;
         this.donationDate = donationDate;
+        this.bloodBankId = bloodBankId;
         this.bloodGroup = bloodGroup;
         this.unitDonated = unitDonated;
     }
@@ -36,12 +37,20 @@ public class DonationModel {
         this.donorId = donorId;
     }
 
-    public LocalDate getDonationDate() {
+    public Date getDonationDate() {
         return donationDate;
     }
 
-    public void setDonationDate(LocalDate donationDate) {
+    public void setDonationDate(Date donationDate) {
         this.donationDate = donationDate;
+    }
+
+    public int getBloodBankId() {
+        return bloodBankId;
+    }
+
+    public void setBloodBankId(int bloodBankId) {
+        this.bloodBankId = bloodBankId;
     }
 
     public String getBloodGroup() {
@@ -60,5 +69,3 @@ public class DonationModel {
         this.unitDonated = unitDonated;
     }
 }
-
-

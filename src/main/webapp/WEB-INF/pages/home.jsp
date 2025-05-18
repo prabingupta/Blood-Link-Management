@@ -15,7 +15,6 @@
   <%@ include file="header.jsp" %>
   
   <section class="slider-section">
-   
     <div class="slider">
       <div class="slides">
         <div class="slide">
@@ -85,10 +84,8 @@
       <h1 class="highlight-title">Be a Lifesaver Today!</h1>
       <p class="banner-desc">Join BloodLink Nepal to make a difference in Nepal’s healthcare system! Donate blood to save lives or request blood for those in urgent need, ensuring no patient goes without support during critical times.</p>
       <p>Up to 1000 lives saved monthly!</p>
-      <a href="<%= request.getContextPath() %>/#" class="btn-action">Donate Now</a>
-      <a href="<%= request.getContextPath() %>/#" class="btn-action">Request for Blood</a>
-     
-      
+      <a href="${pageContext.request.contextPath}/donorregister" class="btn-action">Donate Now</a>
+      <a href="${pageContext.request.contextPath}/request" class="btn-action">Request Blood</a>
     </div>
     <div class="banner-side">
       <img src="${pageContext.request.contextPath}/resources/images/home/donatingblood.jpg" alt="Emergency Blood Donation">
@@ -141,6 +138,17 @@
         <img src="${pageContext.request.contextPath}/resources/images/home/bloodevents4.jpg" alt="Biratnagar Event">
         <p>Biratnagar Blood Drive</p>
         <p>May 10, 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="category-section blood-bank-section">
+    <h2 class="section-title">Access Our Blood Bank</h2>
+    <p class="section-desc">Need blood urgently? Visit our Blood Bank to find available blood types and connect with donors across Nepal to save lives.</p>
+    <div class="category-grid">
+      <div class="category-item">
+        <a href="${pageContext.request.contextPath}/bloodbank" class="blood-bank-btn">Blood Bank</a>
+        <p class="blood-bank-subtitle">Find Available Blood Now</p>
       </div>
     </div>
   </section>

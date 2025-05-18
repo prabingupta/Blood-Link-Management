@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink Nepal - Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/admindashboard.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/css/dashboard.css" />
 </head>
 <body>
     <!-- Admin Heading Bar -->
@@ -29,11 +29,10 @@
         <div class="sidebar">
             <ul class="nav">
                 <li><a href="${contextPath}/dashboard"><span class="icon">🏠</span> Admin Dashboard</a></li>
-                <li><a href="${contextPath}/donors"><span class="icon">👤</span> Donor</a></li>
-                <li><a href="${contextPath}/patients"><span class="icon">🩺</span> Patient</a></li>
-                <li><a href="${contextPath}/donations"><span class="icon">💉</span> Donations</a></li>
-                <li><a href="${contextPath}/bloodRequests"><span class="icon">📋</span> Blood Requests</a></li>
-                <li><a href="${contextPath}/bloodBanks"><span class="icon">🏢</span> Blood Bank</a></li>
+                <li><a href="${contextPath}/managedonor"><span class="icon">👤</span> Manage Donor</a></li>
+                <li><a href="${contextPath}/managepatient"><span class="icon">🩺</span> Manage Patient</a></li>
+                <li><a href="${contextPath}/managerequest"><span class="icon">📋</span> Manage Blood Requests</a></li>
+                <li><a href="${contextPath}/manageblood"><span class="icon">🏢</span> Manage Blood</a></li>
             </ul>
         </div>
 
@@ -75,7 +74,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dynamic data using JSTL -->
                             <c:forEach var="stock" items="${bloodStockList}">
                                 <tr>
                                     <td>${stock.bloodGroup}</td>
@@ -83,7 +81,6 @@
                                     <td>${stock.lastUpdated}</td>
                                 </tr>
                             </c:forEach>
-                            <!-- Fallback sample data if bloodStockList is empty -->
                             <c:if test="${empty bloodStockList}">
                                 <tr>
                                     <td>A+</td>
@@ -120,18 +117,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dynamic data using JSTL -->
                             <c:forEach var="request" items="${recentRequests}">
                                 <tr>
                                     <td>${request.requestId}</td>
                                     <td>${request.patientId}</td>
                                     <td>${request.bloodGroup}</td>
-                                    <td>${request.unitRequired}</td>
+                                    <td>${request.unitRequested}</td>
                                     <td>${request.requestDate}</td>
                                     <td>${request.status}</td>
                                 </tr>
                             </c:forEach>
-                            <!-- Fallback sample data if recentRequests is empty -->
                             <c:if test="${empty recentRequests}">
                                 <tr>
                                     <td>1</td>
