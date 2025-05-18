@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink Nepal - Manage Blood Requests</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/bloodrequest.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/css/managerequest.css" />
 </head>
 <body>
     <header class="admin-header">
@@ -28,13 +29,20 @@
             <ul class="nav">
                 <li><a href="${contextPath}/dashboard"><span class="icon">🏠</span> Admin Dashboard</a></li>
                 <li><a href="${contextPath}/managedonor"><span class="icon">👤</span> Manage Donor</a></li>
-                <li><a href="${contextPath}/managepatient"><span class="icon">🩺</span> Manage Patient</a></li>
                 <li><a href="${contextPath}/managerequest"><span class="icon">📋</span> Blood Requests</a></li>
                 <li><a href="${contextPath}/manageblood"><span class="icon">🏢</span> Manage Blood</a></li>
             </ul>
         </div>
 
         <div class="content">
+            <!-- Messages -->
+            <c:if test="${not empty successMessage}">
+                <div class="message success">${successMessage}</div>
+            </c:if>
+            <c:if test="${not empty errorMessage}">
+                <div class="message error">${errorMessage}</div>
+            </c:if>
+
             <h2>Manage Blood Requests</h2>
             <div class="request-list">
                 <h3>Blood Request List</h3>
@@ -63,34 +71,35 @@
                                 <td>${request.status}</td>
                                 <td>
                                     <c:if test="${request.status == 'Pending'}">
-                                        <a href="${contextPath}/approveRequest?id=${request.requestId}" class="action-btn approve-btn">Approve</a>
-                                        <a href="${contextPath}/declineRequest?id=${request.requestId}" class="action-btn decline-btn">Decline</a>
+                                        <form action="${contextPath}/approveRequest" method="post" style="display: inline;">
+                                            <input type="hidden" name="id" value="${request.requestId}">
+                                            <button type="submit" class="action-btn approve-btn">Approve</button>
+                                        </form>
+                                        <form action="${contextPath}/declineRequest" method="post" style="display: inline;">
+                                            <input type="hidden" name="id" value="${request.requestId}">
+                                            <button type="submit" class="action-btn decline-btn">Decline</button>
+                                        </form>
                                     </c:if>
                                     <c:if test="${request.status != 'Pending'}">
-                                        <span>${request.status}</span>
+                                        <span class="status-${fn:toLowerCase(request.status)}">${request.status}</span>
                                     </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
-                        <c:if test="${empty requestList}">
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>2025-05-01</td>
-                                <td>A+</td>
-                                <td>2</td>
-                                <td>Pending</td>
-                                <td>
-                                    <a href="#" class="action-btn approve-btn">Approve</a>
-                                    <a href="#" class="action-btn decline-btn">Decline</a>
-                                </td>
-                            </tr>
-                        </c:if>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <script>
+        // Auto-hide messages after 5 seconds
+        setTimeout(function() {
+            var messages = document.getElementsByClassName('message');
+            for(var i = 0; i < messages.length; i++) {
+                messages[i].style.display = 'none';
+            }
+        }, 5000);
+    </script>
 </body>
 </html>

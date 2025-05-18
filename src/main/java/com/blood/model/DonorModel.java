@@ -13,7 +13,7 @@ public class DonorModel {
     }
 
     public DonorModel(String donorName, String bloodGroup, String phone, String email, String address, String gender) {
-        this.donorName = donorName;
+    	this.donorName = donorName;
         this.bloodGroup = bloodGroup;
         this.phone = phone;
         this.email = email;

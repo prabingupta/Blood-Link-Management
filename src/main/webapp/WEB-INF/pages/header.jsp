@@ -14,7 +14,7 @@
       <li><a href="${pageContext.request.contextPath}/contact" class="active">Contact Us</a></li>
       <li><a href="${pageContext.request.contextPath}/services" class="active">Our Services</a></li>
       <li><a href="${pageContext.request.contextPath}/portfolio" class="active">Portfolio</a></li>
-      <li><a href="${pageContext.request.contextPath}/profile" class="active">MyProfile</a></li>
+      <li><a href="${pageContext.request.contextPath}/profile" class="active"> 👤 UserProfile</a></li>
       
       
     </ul>

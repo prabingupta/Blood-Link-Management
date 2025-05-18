@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.blood.config.DbConfig;
+import com.blood.model.DonorModel;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/managedonor" })
 public class ManageDonorController extends HttpServlet {
@@ -22,67 +27,72 @@ public class ManageDonorController extends HttpServlet {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        List<DonorModel> donorList = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Blood_Bank", "root", "");
+            conn = DbConfig.getDbConnection();
             String sql = "SELECT * FROM Donor";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
-            request.setAttribute("donorList", rs);
-            request.getRequestDispatcher("/managedonor.jsp").forward(request, response);
+            while (rs.next()) {
+                DonorModel donor = new DonorModel(
+                    rs.getString("Donor_Name"),
+                    rs.getString("Blood_Group"),
+                    rs.getString("Phone"),
+                    rs.getString("Email"),
+                    rs.getString("Address"),
+                    rs.getString("Gender")
+                );
+                donor.setDonorId(rs.getInt("Donor_ID"));
+                donorList.add(donor);
+            }
+
+            request.setAttribute("donorList", donorList);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+            request.setAttribute("errorMessage", "Failed to fetch donor list: " + e.getMessage());
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {}
             try { if (pstmt != null) pstmt.close(); } catch (Exception e) {}
             try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
+        
+        request.getRequestDispatcher("/WEB-INF/pages/admin/managedonor.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("add".equals(action)) {
-            String Donor_Name = request.getParameter("Donor_Name");
-            String Blood_Group = request.getParameter("Blood_Group");
-            String Phone = request.getParameter("Phone");
-            String Email = request.getParameter("Email");
-            String Address = request.getParameter("Address");
-            String Gender = request.getParameter("Gender");
+        if ("delete".equals(action)) {
+            int donorId = Integer.parseInt(request.getParameter("id"));
 
             Connection conn = null;
             PreparedStatement pstmt = null;
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Blood_Bank", "root", "");
-                String sql = "INSERT INTO Donor (donor_name, blood_group, phone, email, address, gender) VALUES (?, ?, ?, ?, ?, ?)";
+                conn = DbConfig.getDbConnection();
+                String sql = "DELETE FROM Donor WHERE Donor_ID = ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, Donor_Name);
-                pstmt.setString(2, Blood_Group);
-                pstmt.setString(3, Phone);
-                pstmt.setString(4, Email);
-                pstmt.setString(5, Address);
-                pstmt.setString(6, Gender);
+                pstmt.setInt(1, donorId);
 
-                int rows = pstmt.executeUpdate();
-                if (rows > 0) {
-                    System.out.println("Donor added successfully.");
+                int deleted = pstmt.executeUpdate();
+                if (deleted > 0) {
+                    request.setAttribute("successMessage", "Donor deleted successfully.");
                 } else {
-                    System.out.println("Donor addition failed.");
+                    request.setAttribute("errorMessage", "Failed to delete donor.");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                response.sendRedirect(request.getContextPath() + "/error.jsp");
+                request.setAttribute("errorMessage", "Error deleting donor: " + e.getMessage());
             } finally {
                 try { if (pstmt != null) pstmt.close(); } catch (Exception e) {}
                 try { if (conn != null) conn.close(); } catch (Exception e) {}
             }
         }
-        response.sendRedirect(request.getContextPath() + "/managedonor");
+        
+        // Refresh the donor list and show the page again
+        doGet(request, response);
     }
 }

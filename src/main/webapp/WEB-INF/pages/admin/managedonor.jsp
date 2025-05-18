@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink Nepal - Manage Donor</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/donordetail.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/css/managedonor.css" />
 </head>
 <body>
     <header class="admin-header">
@@ -28,8 +28,6 @@
             <ul class="nav">
                 <li><a href="${contextPath}/dashboard"><span class="icon">🏠</span> Admin Dashboard</a></li>
                 <li><a href="${contextPath}/managedonor"><span class="icon">👤</span> Manage Donor</a></li>
-                <li><a href="${contextPath}/managepatient"><span class="icon">🩺</span> Manage Patient</a></li>
-                <li><a href="${contextPath}/donation"><span class="icon">💉</span> Donations</a></li>
                 <li><a href="${contextPath}/managerequest"><span class="icon">📋</span> Blood Requests</a></li>
                 <li><a href="${contextPath}/manageblood"><span class="icon">🏢</span> Manage Blood</a></li>
             </ul>

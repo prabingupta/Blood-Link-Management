@@ -4,14 +4,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Utility class for managing HTTP sessions in the Blood Bank Management System.
+ * Utility class for managing HTTP sessions in the BloodLink Nepal application.
  * Provides methods to set, get, remove session attributes, and invalidate sessions for user authentication and session tracking.
  */
 public class SessionUtil {
 
     /**
      * Sets an attribute in the session.
-     * Used to store user data, such as user ID or role, during authentication in the Blood Bank Management System.
+     * Used to store user data, such as username or userType, during authentication in the BloodLink Nepal application.
      *
      * @param request the HttpServletRequest from which the session is obtained
      * @param key     the key under which the attribute is stored
@@ -24,7 +24,7 @@ public class SessionUtil {
 
     /**
      * Retrieves an attribute from the session.
-     * Used to access user data, such as user ID or role, during the session in the Blood Bank Management System.
+     * Used to access user data, such as username or userType, during the session in the BloodLink Nepal application.
      *
      * @param request the HttpServletRequest from which the session is obtained
      * @param key     the key of the attribute to retrieve
@@ -40,7 +40,7 @@ public class SessionUtil {
 
     /**
      * Removes an attribute from the session.
-     * Used to clear specific session data without invalidating the entire session in the Blood Bank Management System.
+     * Used to clear specific session data without invalidating the entire session in the BloodLink Nepal application.
      *
      * @param request the HttpServletRequest from which the session is obtained
      * @param key     the key of the attribute to remove
@@ -54,7 +54,7 @@ public class SessionUtil {
 
     /**
      * Invalidates the current session.
-     * Used for logging out users by clearing all session data in the Blood Bank Management System.
+     * Used for logging out users by clearing all session data in the BloodLink Nepal application.
      *
      * @param request the HttpServletRequest from which the session is obtained
      */

@@ -29,35 +29,28 @@ public class BloodBankController extends HttpServlet {
         List<BloodBankModel> bloodBankList = new ArrayList<>();
 
         // Fetch blood banks from the database
-        try (Connection conn = DbConfig.getDbConnection()) {
-            String query = "SELECT * FROM Blood_Bank";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = DbConfig.getDbConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM BloodBank");
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 BloodBankModel bloodBank = new BloodBankModel();
-                bloodBank.setBloodBankId(rs.getInt("bloodBankId"));
-                bloodBank.setBloodBankName(rs.getString("bloodBankName"));
-                bloodBank.setAddress(rs.getString("address"));
-                bloodBank.setEmail(rs.getString("email"));
-                bloodBank.setPhone(rs.getString("phone"));
+                bloodBank.setBloodBankId(rs.getInt("BloodBank_ID"));
+                bloodBank.setBloodBankName(rs.getString("BloodBank_Name"));
+                bloodBank.setAddress(rs.getString("Address"));
+                bloodBank.setEmail(rs.getString("Email"));
+                bloodBank.setPhone(rs.getString("Phone"));
                 bloodBankList.add(bloodBank);
             }
 
-            rs.close();
-            stmt.close();
         } catch (ClassNotFoundException e) {
             System.out.println("Error here");
             e.printStackTrace();
-            request.setAttribute("errorMessage", "JDBC Driver not found: " + e.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-            return;
+            request.setAttribute("errorMessage", "Unable to connect to database. Please try again later.");
         } catch (SQLException e) {
             System.out.println("Error here 2");
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Database error: " + e.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-            return;
+            request.setAttribute("errorMessage", "Unable to fetch blood bank information. Please try again later.");
         }
 
         // Set the bloodBankList attribute for the JSP
@@ -67,7 +60,112 @@ public class BloodBankController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Since the JSP only displays data, POST handling is not required.
+        String action = request.getParameter("action");
+        
+        try {
+            switch (action) {
+                case "add":
+                    addBloodBank(request, response);
+                    break;
+                case "edit":
+                    editBloodBank(request, response);
+                    break;
+                case "delete":
+                    deleteBloodBank(request, response);
+                    break;
+                default:
+                    doGet(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "An error occurred while processing your request.");
+            doGet(request, response);
+        }
+    }
+
+    private void addBloodBank(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String bloodBankName = request.getParameter("bloodBankName");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+
+        try (Connection conn = DbConfig.getDbConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO BloodBank (BloodBank_Name, Address, Email, Phone) VALUES (?, ?, ?, ?)")) {
+            
+            stmt.setString(1, bloodBankName);
+            stmt.setString(2, address);
+            stmt.setString(3, email);
+            stmt.setString(4, phone);
+            
+            int result = stmt.executeUpdate();
+            if (result > 0) {
+                request.setAttribute("successMessage", "Blood bank added successfully!");
+            } else {
+                request.setAttribute("errorMessage", "Failed to add blood bank.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error adding blood bank: " + e.getMessage());
+        }
+        
+        doGet(request, response);
+    }
+
+    private void editBloodBank(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int bloodBankId = Integer.parseInt(request.getParameter("bloodBankId"));
+        String bloodBankName = request.getParameter("bloodBankName");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+
+        try (Connection conn = DbConfig.getDbConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "UPDATE BloodBank SET BloodBank_Name=?, Address=?, Email=?, Phone=? WHERE BloodBank_ID=?")) {
+            
+            stmt.setString(1, bloodBankName);
+            stmt.setString(2, address);
+            stmt.setString(3, email);
+            stmt.setString(4, phone);
+            stmt.setInt(5, bloodBankId);
+            
+            int result = stmt.executeUpdate();
+            if (result > 0) {
+                request.setAttribute("successMessage", "Blood bank updated successfully!");
+            } else {
+                request.setAttribute("errorMessage", "Failed to update blood bank.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error updating blood bank: " + e.getMessage());
+        }
+        
+        doGet(request, response);
+    }
+
+    private void deleteBloodBank(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int bloodBankId = Integer.parseInt(request.getParameter("bloodBankId"));
+
+        try (Connection conn = DbConfig.getDbConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "DELETE FROM BloodBank WHERE BloodBank_ID=?")) {
+            
+            stmt.setInt(1, bloodBankId);
+            
+            int result = stmt.executeUpdate();
+            if (result > 0) {
+                request.setAttribute("successMessage", "Blood bank deleted successfully!");
+            } else {
+                request.setAttribute("errorMessage", "Failed to delete blood bank.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error deleting blood bank: " + e.getMessage());
+        }
+        
         doGet(request, response);
     }
 }

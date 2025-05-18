@@ -20,7 +20,7 @@
     <main class="profile-section">
         <div class="container-box profile-header">
             <h1>My Profile</h1>
-            <p>Enter and update your personal information to stay connected with BloodLink Nepal. Your details will be stored securely for future use.</p>
+            <p>Update your personal information to stay connected with BloodLink Nepal.</p>
         </div>
 
         <!-- Profile Picture Section -->
@@ -31,13 +31,14 @@
             <div class="image-wrapper">
                 <div class="image-placeholder hidden">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                 </div>
-                <img src="${contextPath}/${user.profilePicture != null && !empty user.profilePicture ? user.profilePicture : 'resources/images/pages/default.jpg'}" alt="Profile Picture" class="profile-img" data-default="${contextPath}/resources/images/pages/default.jpg">
+                <img src="${contextPath}/${sessionScope.profilePicture != null ? sessionScope.profilePicture : 'resources/images/pages/default.jpg'}" 
+                     alt="Profile Picture" class="profile-img" data-default="${contextPath}/resources/images/pages/default.jpg">
             </div>
             <form id="uploadForm" enctype="multipart/form-data" class="upload-form">
-                <input type="hidden" name="userId" value="${user.userId}" />
+                <input type="hidden" name="userId" value="${sessionScope.userId != null ? sessionScope.userId : '1'}" />
                 <div class="form-group file-input-wrapper">
                     <label for="profilePicture" class="file-input-label">Choose File</label>
                     <input type="file" id="profilePicture" name="profilePicture" accept="image/png,image/jpeg" />
@@ -45,7 +46,7 @@
                 </div>
                 <div class="photo-actions">
                     <button type="submit" class="btn-action upload-btn">Upload Your Photo</button>
-                    <button type="button" class="btn-secondary delete-btn" onclick="deleteProfilePicture(${user.userId})">Delete Image</button>
+                    <button type="button" class="btn-secondary delete-btn" onclick="deleteProfilePicture('${sessionScope.userId != null ? sessionScope.userId : '1'}')">Delete Image</button>
                 </div>
             </form>
         </div>
@@ -54,25 +55,25 @@
         <div class="container-box info-edit">
             <h2>Update Information</h2>
             <form id="editForm" class="edit-form">
-                <input type="hidden" name="userId" value="${user.userId}" />
+                <input type="hidden" name="userId" value="${sessionScope.userId != null ? sessionScope.userId : '1'}" />
                 <div class="form-group">
                     <label for="fullName">Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" value="${user.fullName}" required />
+                    <input type="text" id="fullName" name="fullName" value="${sessionScope.fullName != null ? sessionScope.fullName : ''}" required />
                     <span class="error" id="fullNameError"></span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" value="${user.email}" required />
+                    <input type="email" id="email" name="email" value="${sessionScope.email != null ? sessionScope.email : ''}" required />
                     <span class="error" id="emailError"></span>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" value="${user.phone}" required />
+                    <input type="text" id="phone" name="phone" value="${sessionScope.phone != null ? sessionScope.phone : ''}" required />
                     <span class="error" id="phoneError"></span>
                 </div>
                 <div class="form-group">
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" value="${user.address}" required />
+                    <input type="text" id="address" name="address" value="${sessionScope.address != null ? sessionScope.address : ''}" required />
                     <span class="error" id="addressError"></span>
                 </div>
                 <div class="form-group">
@@ -117,10 +118,21 @@
             setTimeout(() => container.innerHTML = '', 5000);
         }
 
-        // Update file name display
+        // Update file name display and preview image
         document.getElementById('profilePicture').addEventListener('change', function() {
             const fileName = this.files.length ? this.files[0].name : 'No file chosen';
             document.getElementById('file-name').textContent = fileName;
+            if (this.files.length) {
+                const file = this.files[0];
+                const reader = new FileReader();
+                reader.onload = () => {
+                    imgElement.src = reader.result;
+                    toggleImageDisplay(true);
+                    console.log('Preview set for image: ' + fileName);
+                };
+                reader.onerror = () => console.error('Error reading file: ' + fileName);
+                reader.readAsDataURL(file);
+            }
         });
 
         // Delete profile picture
@@ -135,20 +147,18 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: 'userId=' + userId
+                    body: 'userId=' + encodeURIComponent(userId)
                 });
 
-                const data = await response.json();
-                if (data.success) {
-                    const img = new Image();
-                    img.src = defaultImage;
-                    img.onload = () => {
-                        imgElement.src = defaultImage;
-                        toggleImageDisplay(false);
-                        showMessage('Profile picture deleted successfully!');
-                    };
+                const text = await response.text();
+                console.log('Delete response: ' + text);
+                const [status, message] = text.split(':');
+                if (status === 'success') {
+                    imgElement.src = defaultImage;
+                    toggleImageDisplay(false);
+                    showMessage(message);
                 } else {
-                    showMessage('Failed to delete profile picture: ' + (data.message || 'Unknown error'), true);
+                    showMessage(message, true);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -167,6 +177,7 @@
                 return;
             }
 
+            showMessage('Uploading...', false);
             const formData = new FormData(document.getElementById('uploadForm'));
             try {
                 const response = await fetch('${contextPath}/updateProfile', {
@@ -174,17 +185,26 @@
                     body: formData
                 });
 
-                const data = await response.json();
-                if (data.success) {
-                    const img = new Image();
-                    img.src = '${contextPath}/' + data.profilePicture;
-                    img.onload = () => {
-                        imgElement.src = img.src;
-                        toggleImageDisplay(true);
-                        showMessage('Profile picture uploaded successfully!');
+                const text = await response.text();
+                console.log('Upload response: ' + text);
+                const parts = text.split(':');
+                const status = parts[0];
+                const message = parts[1];
+                const fileName = parts[2];
+
+                if (status === 'success' && fileName) {
+                    const newSrc = '${contextPath}/' + fileName;
+                    imgElement.src = newSrc;
+                    toggleImageDisplay(true);
+                    showMessage(message);
+                    // Verify image load
+                    imgElement.onerror = () => {
+                        console.error('Failed to load image: ' + newSrc);
+                        showMessage('Image uploaded but failed to display.', true);
+                        toggleImageDisplay(false);
                     };
                 } else {
-                    showMessage(data.message || 'Failed to upload profile picture.', true);
+                    showMessage(message || 'Failed to upload profile picture.', true);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -208,22 +228,30 @@
                     }
                 });
 
-                const data = await response.json();
-                if (data.success) {
-                    showMessage('Profile updated successfully!');
+                const text = await response.text();
+                console.log('Update response: ' + text);
+                if (text.startsWith('success:')) {
+                    showMessage(text.split(':')[1]);
+                } else if (text.startsWith('error:')) {
+                    const errorParts = text.substring(6).split(';').filter(e => e);
+                    errorParts.forEach(part => {
+                        const [field, error] = part.split('=');
+                        document.getElementById(`${field}Error`).textContent = error;
+                    });
                 } else {
-                    if (data.errors) {
-                        for (const [field, error] of Object.entries(data.errors)) {
-                            document.getElementById(`${field}Error`).textContent = error;
-                        }
-                    } else {
-                        showMessage(data.message || 'Failed to update profile.', true);
-                    }
+                    showMessage('Failed to update profile.', true);
                 }
             } catch (error) {
                 console.error('Error:', error);
                 showMessage('An error occurred while updating the profile.', true);
             }
+        });
+
+        // Handle cancel button
+        document.getElementById('editForm').addEventListener('reset', (event) => {
+            const errors = document.querySelectorAll('.edit-form .error');
+            errors.forEach(error => error.textContent = '');
+            showMessage('Cancelled');
         });
     </script>
 </body>

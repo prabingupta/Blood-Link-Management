@@ -99,7 +99,7 @@ public class DonorController extends HttpServlet {
         address = address.trim();
         gender = gender.trim();
 
-        // Create DonorModel
+        // Create DonorModel using the constructor without donorId
         DonorModel donor = new DonorModel(donorName, bloodGroup, phone, email, address, gender);
 
         // Log trimmed inputs

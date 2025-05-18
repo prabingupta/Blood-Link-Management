@@ -48,6 +48,42 @@ public class RequestController extends HttpServlet {
             return;
         }
 
+        // Validate if Patient exists
+        try (Connection conn = DbConfig.getDbConnection()) {
+            String checkPatientQuery = "SELECT COUNT(*) FROM Patient WHERE Patient_ID = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkPatientQuery);
+            checkStmt.setInt(1, patientId);
+            var rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) == 0) {
+                request.setAttribute("patientIdError", "Patient ID does not exist. Please enter a valid Patient ID.");
+                request.getRequestDispatcher("/WEB-INF/pages/bloodrequest.jsp").forward(request, response);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error validating Patient ID: " + e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/pages/bloodrequest.jsp").forward(request, response);
+            return;
+        }
+
+        // Validate if Blood Bank exists
+        try (Connection conn = DbConfig.getDbConnection()) {
+            String checkBankQuery = "SELECT COUNT(*) FROM BloodBank WHERE BloodBank_ID = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkBankQuery);
+            checkStmt.setInt(1, bloodBankId);
+            var rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) == 0) {
+                request.setAttribute("bloodBankIdError", "Blood Bank ID does not exist. Please enter a valid Blood Bank ID.");
+                request.getRequestDispatcher("/WEB-INF/pages/bloodrequest.jsp").forward(request, response);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error validating Blood Bank ID: " + e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/pages/bloodrequest.jsp").forward(request, response);
+            return;
+        }
+
         if (bloodBankId <= 0) {
             request.setAttribute("bloodBankIdError", "Blood Bank ID must be a positive number.");
             request.getRequestDispatcher("/WEB-INF/pages/bloodrequest.jsp").forward(request, response);
@@ -84,7 +120,7 @@ public class RequestController extends HttpServlet {
 
         // Insert into database using DbConfig
         try (Connection conn = DbConfig.getDbConnection()) {
-            String query = "INSERT INTO Blood_Request (Patient_ID, BloodBank_ID, Request_Date, Blood_Group, Unit_Requested, Status) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO BloodRequest (Patient_ID, BloodBank_ID, Request_Date, Blood_Group, Unit_Requested, Status) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, bloodRequest.getPatientId());
             stmt.setInt(2, bloodRequest.getBloodBankId());

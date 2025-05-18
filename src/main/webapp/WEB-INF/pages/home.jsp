@@ -37,7 +37,7 @@
           <img src="${pageContext.request.contextPath}/resources/images/home/BecomeDonor.jpg" alt="Slide 3">
           <div class="slide-content">
             <h2>Success Story: 1000+ Lives Saved</h2>
-            <p>Thanks to our donors, we’ve made a difference!</p>
+            <p>Thanks to our donors, we've made a difference!</p>
             <a href="#" class="btn-action">Read Stories</a>
           </div>
         </div>
@@ -82,9 +82,10 @@
   <main class="banner-section" style="background: url('${pageContext.request.contextPath}/resources/images/home/background.jpg') no-repeat center center/cover;">
     <div class="banner-content">
       <h1 class="highlight-title">Be a Lifesaver Today!</h1>
-      <p class="banner-desc">Join BloodLink Nepal to make a difference in Nepal’s healthcare system! Donate blood to save lives or request blood for those in urgent need, ensuring no patient goes without support during critical times.</p>
+      <p class="banner-desc">Join BloodLink Nepal to make a difference in Nepal's healthcare system! Donate blood to save lives or request blood for those in urgent need, ensuring no patient goes without support during critical times.</p>
       <p>Up to 1000 lives saved monthly!</p>
       <a href="${pageContext.request.contextPath}/donorregister" class="btn-action">Donate Now</a>
+      <a href="${pageContext.request.contextPath}/patient" class="btn-action">Register as Patient</a>
       <a href="${pageContext.request.contextPath}/request" class="btn-action">Request Blood</a>
     </div>
     <div class="banner-side">
@@ -117,7 +118,7 @@
 
   <section class="category-section">
     <h2 class="section-title">Upcoming Blood Donation Events</h2>
-    <p class="section-desc">Be part of life-changing blood drives with BloodLink Nepal! Join our upcoming events in cities like Kathmandu and Pokhara to donate blood and support Nepal’s growing need for blood donations.</p>
+    <p class="section-desc">Be part of life-changing blood drives with BloodLink Nepal! Join our upcoming events in cities like Kathmandu and Pokhara to donate blood and support Nepal's growing need for blood donations.</p>
     <div class="category-grid">
       <div class="category-item">
         <img src="${pageContext.request.contextPath}/resources/images/home/eventsblood1.jpg" alt="Kathmandu Event">
@@ -159,7 +160,7 @@
     <div class="category-grid">
       <div class="category-item">
         <img src="${pageContext.request.contextPath}/resources/images/home/child.jpg" alt="Story 1">
-        <p>Saving a Child’s Life</p>
+        <p>Saving a Child's Life</p>
         <p>A+ blood donation success</p>
       </div>
       <div class="category-item">

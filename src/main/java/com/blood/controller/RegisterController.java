@@ -122,6 +122,23 @@ public class RegisterController extends HttpServlet {
             int result = stmt.executeUpdate();
 
             if (result > 0) {
+                // If user type is Patient, also insert into Patient table
+                if ("Patient".equals(userType)) {
+                    String patientQuery = "INSERT INTO Patient (Patient_Name, Blood_Group, Gender, Date_Of_Birth, Request_Date, Required_Unit) VALUES (?, ?, ?, ?, CURDATE(), 0)";
+                    PreparedStatement patientStmt = conn.prepareStatement(patientQuery);
+                    patientStmt.setString(1, fullName);
+                    patientStmt.setString(2, bloodGroup);
+                    patientStmt.setString(3, gender);
+                    patientStmt.setDate(4, java.sql.Date.valueOf(dob));
+                    
+                    int patientResult = patientStmt.executeUpdate();
+                    if (patientResult <= 0) {
+                        request.setAttribute("errorMessage", "Failed to register patient details.");
+                        request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+                        return;
+                    }
+                }
+                
                 request.setAttribute("successMessage", "Registration successful! Please login.");
                 request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
             } else {

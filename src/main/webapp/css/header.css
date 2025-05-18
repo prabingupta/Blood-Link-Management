@@ -29,7 +29,7 @@ header {
 
 .logo {
     display: flex;
-    align-items: center;
+    align-items: left;
 }
 
 .logo img {
@@ -80,18 +80,27 @@ header {
 }
 
 .nav-links .logout a {
-    background-color: #fff;
-    color: #d32f2f;
-    padding: 5px 7px; /* Match other links */
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.3s ease;
+    background-color: #b71c1c;
+    color: #ffffff; 
+    padding: 8px 15px; 
+    border-radius: 6px; 
+    font-weight: 600; 
+    font-size: 14px; 
+    transition: all 0.3s ease; 
+    text-decoration: none; 
+    border: 1px solid #9a0007; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); 
+    display: inline-flex; 
+    align-items: center;
+    gap: 6px; 
 }
 
 .nav-links .logout a:hover {
-    background-color: #ffccbc;
-    transform: translateY(-2px);
+    background-color: #9a0007; 
+    color: #ffffff; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
+    border-color: #750004; 
 }
 
 .sub-nav {
@@ -150,8 +159,8 @@ header {
     }
 
     .nav-links .logout a {
-        font-size: 12px;
-        padding: 4px 6px;
+        font-size: 13px;
+        padding: 6px 12px;
     }
 
     .sub-nav {
@@ -181,8 +190,8 @@ header {
     }
 
     .nav-links .logout a {
-        font-size: 11px;
-        padding: 3px 5px;
+        font-size: 12px;
+        padding: 5px 10px;
     }
 
     .sub-nav a {

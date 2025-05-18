@@ -1,24 +1,23 @@
 package com.blood.util;
 
 import jakarta.servlet.http.Cookie;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Arrays;
 
 /**
- * Utility class for managing cookies in the Blood Bank Management System.
+ * Utility class for managing cookies in the BloodLink Nepal application.
  * Provides methods to add, retrieve, and delete cookies for session management.
  */
 public class CookieUtil {
 
     /**
      * Adds a cookie with the specified name, value, and maximum age.
-     * Used for storing user session data, such as login tokens, in the Blood Bank Management System.
+     * Used for storing user session data, such as roles, in the BloodLink Nepal application.
      *
      * @param response the HttpServletResponse to add the cookie to
-     * @param name     the name of the cookie (e.g., "userToken")
+     * @param name     the name of the cookie (e.g., "role")
      * @param value    the value of the cookie
      * @param maxAge   the maximum age of the cookie in seconds
      */
@@ -32,7 +31,7 @@ public class CookieUtil {
 
     /**
      * Retrieves a cookie by its name from the HttpServletRequest.
-     * Used to check for existing user session cookies in the Blood Bank Management System.
+     * Used to check for existing user session cookies in the BloodLink Nepal application.
      *
      * @param request the HttpServletRequest to get the cookie from
      * @param name    the name of the cookie to retrieve
@@ -50,7 +49,7 @@ public class CookieUtil {
 
     /**
      * Deletes a cookie by setting its max age to 0.
-     * Used for logging out users or clearing session data in the Blood Bank Management System.
+     * Used for logging out users or clearing session data in the BloodLink Nepal application.
      *
      * @param response the HttpServletResponse to add the deletion cookie to
      * @param name     the name of the cookie to delete
